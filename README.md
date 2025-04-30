@@ -1,28 +1,13 @@
 
-# BNS Master Website
+# BNS Smart Ad Wizard – GitHub Pages
 
-This is the final, branded, production-ready version of the Best Network Systems (BNS) website.
+This is the public-facing wizard for https://bnsai4u.github.io/BNSAds/
 
-## ✅ What's Included
+## Features
+- Generate AI-powered CTV ad scripts
+- Launch VideoFX previews in Google AI Studio
+- Connects to backend for Gemini ad generation (optional)
+- Mobile + desktop responsive
 
-- **BNS Logo + Hero Section**
-- **"One Pass. Endless Possibilities." Headline**
-- **AdsPro Player linked to `/acme`**
-- **CRM Capture (Email, Phone)**
-- **3-option AI Ad Wizard** (Website, Freeform, Full Guided)
-- **Full eWallet Companion Offer Creator** (matches Excel upload format)
-- **AI Image Generator placeholder button**
-- **Branded with BNS colors**
-- **Mobile-responsive, GitHub-ready HTML**
-
-## 🚀 How to Use
-
-1. Open `index.html` in your browser to test locally.
-2. Upload entire folder to GitHub Pages, Netlify, or S3 to host live.
-3. All data is placeholder/simulated. You can integrate your own backend or AI service later.
-
-## 📧 Contact
-
-Best Network Systems  
-info@bestnetworksystems.net  
-https://bestnetworksystems.com
+## Deploy
+Push to `gh-pages` branch of the BNSAds repo to publish live.

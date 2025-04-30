@@ -2,257 +2,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BNS Master Website - Responsive</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BNS Smart Ad Wizard – BNSAds</title>
   <style>
-    * { box-sizing: border-box; }
-    body { font-family: Arial, sans-serif; margin: 0; background: #f8fbff; color: #222; }
-    header {
-      background: #0b3d91;
-      color: #fff;
-      padding: 20px;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 999;
-    }
-    header img { height: 50px; flex: 0 0 auto; }
-    header nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-      flex: 1 1 auto;
-    }
-    header nav a {
-      color: white;
-      margin: 5px 10px;
-      text-decoration: none;
-      font-weight: bold;
-      white-space: nowrap;
-    }
-    header div:nth-child(2) {
-      flex: 1 1 100%;
-      text-align: center;
-      font-size: 22px;
-      font-weight: bold;
-      margin: 10px 0;
-    }
-    section {
-      padding: 40px 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-    h2 {
-      color: #0b3d91;
-      margin-top: 30px;
-    }
-    input, select, textarea, button {
-      width: 100%;
-      max-width: 500px;
-      margin: 10px auto;
-      display: block;
-      padding: 12px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
-    button {
-      background: #00aaff;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #008fcc;
-    }
-    iframe {
-      width: 100%;
-      border: none;
-    }
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        text-align: center;
-      }
-      header nav {
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-      header div:nth-child(2) {
-        order: -1;
-        font-size: 18px;
-      }
-    }
-    body { font-family: Arial, sans-serif; margin: 0; background: #f8fbff; color: #222; }
-    header { background: #0b3d91; color: #fff; padding: 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 999; }
-    nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
-    nav { margin-left: auto; }
-    header img { height: 50px; }
-    section { padding: 40px 20px; max-width: 1000px; margin: auto; }
-    h2 { color: #0b3d91; margin-top: 30px; }
-    input, select, textarea, button {
-      width: 100%; max-width: 500px; margin: 10px auto; display: block;
-      padding: 12px; font-size: 16px; border: 1px solid #ccc; border-radius: 6px;
-    }
-    button {
-      background: #00aaff; color: white; border: none; cursor: pointer;
-    }
-    button:hover { background: #008fcc; }
-    iframe { width: 100%; height: 315px; border: none; }
+    body { font-family: Arial, sans-serif; padding: 2rem; margin: 0 auto; max-width: 900px; background: #f9f9f9; }
+    input, select { margin: 5px 0; width: 100%; padding: 10px; }
+    button { padding: 10px 15px; background: #1e3a8a; color: white; border: none; margin-top: 10px; cursor: pointer; }
+    h1, h2 { color: #1e3a8a; }
+    #generatedAdPreview, #videoPreview { background: #ffffff; padding: 1rem; border: 1px solid #ccc; border-radius: 5px; margin-top: 20px; }
+    .section { margin-top: 30px; }
+    @media (max-width: 768px) { body { padding: 1rem; } }
   </style>
-  <script>
-    function toggleWizardOptions(mode) {
-      document.getElementById("websiteWizard").style.display = mode === 'website' ? 'block' : 'none';
-      document.getElementById("freeformWizard").style.display = mode === 'freeform' ? 'block' : 'none';
-      document.getElementById("fullWizard").style.display = mode === 'full' ? 'block' : 'none';
-    }
-    function captureLead() {
-      const email = document.getElementById("userEmail").value;
-      const phone = document.getElementById("userPhone").value;
-      if (email && phone) {
-        localStorage.setItem("bnsLead", JSON.stringify({ email, phone, timestamp: new Date().toISOString() }));
-      }
-    }
-  </script>
 </head>
 <body>
+  <h1>📺 BNS Smart Ad + Offer Generator</h1>
+  <p>Create, preview, and launch your own AI-generated CTV ad with companion eWallet offers.</p>
 
+  <form id="adWizardForm" onsubmit="return generateAdPreview();">
+    <label>Business Type or Industry:</label>
+    <input id="industry" placeholder="e.g. bakery, gym" value="barber" />
 
+    <label>Promotional Offer:</label>
+    <input id="offer" placeholder="e.g. 50% off for new clients" value="50% off" />
 
-<header>
-  <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
-    <a href="/"><img src="img/bns_logo.png" alt="BNS Logo" style="height: 50px;"></a>
-    <div style="flex: 1; text-align: center;">
-      <span style="font-size: 28px; font-weight: bold;">One Pass. Endless Possibilities.</span>
+    <label>Target Audience:</label>
+    <input id="audience" placeholder="e.g. college students, tourists" value="busy professionals" />
+
+    <label>Brand Tone:</label>
+    <input id="tone" placeholder="e.g. casual, luxury, humorous" value="fun and friendly" />
+
+    <label>Ad Length (seconds):</label>
+    <select id="adLength">
+      <option>8</option>
+      <option selected>15</option>
+      <option>30</option>
+    </select>
+
+    <button type="submit">🧠 Generate Ad Script</button>
+  </form>
+
+  <div class="section">
+    <h2>🧠 AI-Generated Ad Preview</h2>
+    <div id="generatedAdPreview">
+      ✨ Looking for a deal? Joe’s Barbershop is offering 50% off for new customers. Walk in or book now — because you deserve to look sharp.
     </div>
-    
-
-<nav>
-  <a href="#wizard">Create Ad</a>
-  <a href="#offer">Create Offer</a>
-  <a href="https://getmypass.bestnetworksystems.com/" target="_blank">Get Pass</a>
-  <a href="#adspro">Watch Ad</a>
-  <a href="#offers">Get Offers</a>
-  <a href="https://analytics.bestnetworksystems.com/#/auth/login" target="_blank">View Analytics</a>
-  <a href="https://qa.bestnetworksystems.com/#/signup" target="_blank">Signup</a>
-</nav>
-
-
-  </div>
-</header>
-
-
-
-<section id="adspro">
-  <h2>CTV That Converts — Unlock Companion Offers with Every Ad</h2>
-  <iframe src="https://adspro.bestnetworksystems.com/acme"></iframe>
-</section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<section id="signup" style="padding-top: 20px; padding-bottom: 40px;">
-  <h2 style="margin-bottom: 20px;">Get Your BNS Pass</h2>
-  <div style="position: relative; width: 100%; height: 0; padding-bottom: 1400px; margin-bottom: 0;">
-    <iframe src="https://getmypass.bestnetworksystems.com/?merchant=acme"
-            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
-            allowfullscreen
-            scrolling="no">
-    </iframe>
-  </div>
-</section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<section id="wizard">
-  <h2>Create Your Smart Ad</h2>
-  <label><input type="radio" name="mode" onclick="toggleWizardOptions('website')"> Website Only</label>
-  <label><input type="radio" name="mode" onclick="toggleWizardOptions('freeform')"> Freeform</label>
-  <label><input type="radio" name="mode" onclick="toggleWizardOptions('full')"> Full Guided Wizard</label>
-
-  <div id="websiteWizard" style="display:none;">
-    <input placeholder="Business Website URL (https://...)"/>
-    <input placeholder="Short Description"/>
-    <input placeholder="Target Audience"/>
-    <label><input type="checkbox"> Include eWallet Offer</label>
-    <select><option>8 sec</option><option>15 sec</option><option>30 sec</option><option>60 sec</option></select>
-    <button>Generate Ad from Website</button>
+    <button onclick="launchVideoFX()">🎬 Launch in Google AI Studio</button>
   </div>
 
-  <div id="freeformWizard" style="display:none;">
-    <textarea placeholder="Describe your ad idea here..."></textarea>
-    <label><input type="checkbox"> Include eWallet Offer</label>
-    <select><option>8 sec</option><option>15 sec</option><option>30 sec</option><option>60 sec</option></select>
-    <button>Generate Ad from Freeform</button>
+  <div class="section">
+    <h2>🎥 Future Video Preview</h2>
+    <div id="videoPreview">🔄 Video will appear here once VideoFX API is connected.</div>
   </div>
 
-  <div id="fullWizard" style="display:none;">
-    <input placeholder="Business Name"/>
-    <input placeholder="Industry / Type"/>
-    <input placeholder="Product or Service Featured"/>
-    <input placeholder="Special Offer or Value"/>
-    <input placeholder="Target Audience"/>
-    <select><option>Teens (13–19)</option><option>20–35</option><option>36–55</option><option>55+</option></select>
-    <input placeholder="Preferred Nationality"/>
-    <input placeholder="Location"/>
-    <input placeholder="Website URL"/>
-    <select><option>Fun & Casual</option><option>Professional</option><option>Bold & Exciting</option></select>
-    <select><option>Visual with Narration</option><option>Text Only</option></select>
-    <select><option>8 sec</option><option>15 sec</option><option>30 sec</option><option>60 sec</option></select>
-    <label><input type="checkbox"> Include eWallet Offer</label>
-    <button>Generate Ad from Full Wizard</button>
-  </div>
-</section>
+<script>
+function generateAdPreview() {
+  const payload = {
+    industry: document.getElementById("industry").value,
+    offer: document.getElementById("offer").value,
+    audience: document.getElementById("audience").value,
+    tone: document.getElementById("tone").value,
+    length: document.getElementById("adLength").value
+  };
 
-<section id="offer">
-  <h2>Create Your eWallet Companion Offer</h2>
-  <input placeholder="Offer Type"/>
-  <input placeholder="Countries (comma-separated)"/>
-  <input placeholder="Categories (comma-separated)"/>
-  <input placeholder="Offer Number"/>
-  <input placeholder="Offer Title"/>
-  <textarea placeholder="Offer Description"></textarea>
-  <input placeholder="From Date (MM/DD/YYYY)"/>
-  <input placeholder="To Date (MM/DD/YYYY)"/>
-  <input placeholder="Offer Duration (days)"/>
-  <textarea placeholder="Terms and Conditions"></textarea>
-  <input placeholder="Offer Value (cash, points, % off)"/>
-  <input placeholder="Keywords (comma-separated)"/>
-  <input placeholder="Store Name"/>
-  <input placeholder="Redeem Limit"/>
-  <input placeholder="Product Name"/>
-  <input placeholder="Product ID"/>
-  <input placeholder="Brand Name"/>
-  <input placeholder="Merchant Name"/>
-  <button onclick="alert('🧠 AI Offer Image Generated! (placeholder)')">Generate AI Image</button>
-</section>
+  const script = `✨ Looking for a deal? Our ${payload.industry} is offering ${payload.offer} for ${payload.audience}. Enjoy a ${payload.tone} ${payload.length}-second message crafted just for you.`;
+  document.getElementById("generatedAdPreview").innerText = script;
+  return false;
+}
 
+function launchVideoFX() {
+  const script = document.getElementById("generatedAdPreview").innerText;
+  if (!script || script.includes("Your ad will appear here")) {
+    alert("⚠️ Please generate a script before launching VideoFX.");
+    return;
+  }
+  const prompt = encodeURIComponent(script);
+  const fxURL = `https://aistudio.google.com/generate-video?prompt=${prompt}`;
+  window.open(fxURL, "_blank");
+}
+</script>
 </body>
 </html>
